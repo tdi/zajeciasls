@@ -18,7 +18,7 @@ module.exports.hi = async (event, _ctx, cb) => {
   }
 
   const dogs  = await docClient.scan({TableName: [TABLE_NAME]}).promise();
-  cb(null, sendRes(200, dogs.Items));
+  cb(null, sendRes(200,  dogs.Items));
  
 };
 
