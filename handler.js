@@ -14,11 +14,11 @@ module.exports.hi = async (event, _ctx, cb) => {
     };
     const dog = await docClient.get(params).promise();
   
-    cb(null, sendRes(200, sendRes(200, dog)));
+    cb(null, sendRes(200, dog));
   }
 
   const dogs  = await docClient.scan({TableName: [TABLE_NAME]}).promise();
-  cb(null, sendRes(200, sendRes(200, dogs.Items)));
+  cb(null, sendRes(200, dogs.Items));
  
 };
 
