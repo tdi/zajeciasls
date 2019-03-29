@@ -20,6 +20,7 @@ functions:
       - http:
          path: dogs
          method: get
+         cors: true
 
 resources:
   Resources:
