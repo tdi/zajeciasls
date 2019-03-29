@@ -5,17 +5,17 @@ const docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports.hi = async (event, _ctx, cb) => {
 
-  if (event.queryStringParameters) {
-    const params = {
-      TableName: [TABLE_NAME],
-      Key: {
-        name: event.queryStringParameters.name
-      }
-    };
-    const dog = await docClient.get(params).promise();
+  // if (event.queryStringParameters) {
+  //   const params = {
+  //     TableName: [TABLE_NAME],
+  //     Key: {
+  //       name: event.queryStringParameters.name
+  //     }
+  //   };
+  //   const dog = await docClient.get(params).promise();
   
-    cb(null, sendRes(200, dog));
-  }
+  //   cb(null, sendRes(200, dog));
+  // }
 
   const dogs  = await docClient.scan({TableName: [TABLE_NAME]}).promise();
   cb(null, sendRes(200,  dogs.Items));
