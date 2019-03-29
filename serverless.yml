@@ -1,0 +1,39 @@
+service: dogs 
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+  stage: dev
+  region: eu-west-1
+  environment:
+    DOGS_TABLE: ${self:service}-Users-${opt:stage, self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource: "*"  
+functions:
+  hi:
+    handler: handler.hi
+    events:
+      - http:
+         path: dogs
+         method: get
+
+resources:
+  Resources:
+    DogsTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        AttributeDefinitions:
+          -
+            AttributeName: name
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: name
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+        TableName: ${self:provider.environment.DOGS_TABLE}
