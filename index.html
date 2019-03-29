@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <script type="text/javascript">
+        const getDogs = () =>               
+          fetch('https://z7aq9fpeye.execute-api.eu-west-1.amazonaws.com/dev/dogs')
+          .then(c => c.json())
+          .then(data=>{
+                const els = data.dogs.Items.map(dog => `<li>race: <strong>${
+                    dog.race
+                    }</strong>, name: <strong>${
+                    dog.name
+                    }</strong></li>`)
+                document.body.innerHTML = '<ul>' + els.join('') + "</ul>";
+                })
+        </script>
+    </head>
+    <body onload="getDogs();">
+
+    </body>
+</html>
